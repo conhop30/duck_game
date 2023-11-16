@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5kt4yhfngd3u"]
+
+[ext_resource type="Script" path="res://egg.gd" id="1_8bqtj"]
+[ext_resource type="Texture2D" uid="uid://d0ndpi6m1fl3d" path="res://duck_animations/egg.png" id="1_58e5v"]
+[ext_resource type="Texture2D" uid="uid://bn0h62r8myh47" path="res://duck_animations/egg_crack.png" id="3_qlg4c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2x3e3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qlg4c")
+}],
+"loop": true,
+"name": &"crack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_58e5v")
+}],
+"loop": true,
+"name": &"whole",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dahec"]
+height = 26.0
+
+[node name="egg" type="Area2D"]
+position = Vector2(99, 75)
+scale = Vector2(2, 2)
+script = ExtResource("1_8bqtj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2x3e3")
+animation = &"whole"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_dahec")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmsv1iip1nryx"]
+
+[ext_resource type="Texture2D" uid="uid://7bttwdn1jy6m" path="res://icon.svg" id="1_knc52"]
+[ext_resource type="Script" path="res://pit.gd" id="1_r0dwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhg0p"]
+size = Vector2(128, 123)
+
+[node name="pit" type="Area2D"]
+script = ExtResource("1_r0dwh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2.5)
+shape = SubResource("RectangleShape2D_nhg0p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_knc52")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmskdjiosgfyv"]
+
+[ext_resource type="PackedScene" uid="uid://ho6qwoa6cc1x" path="res://duck.tscn" id="1_iwj72"]
+[ext_resource type="Script" path="res://main.gd" id="1_nhlrp"]
+[ext_resource type="PackedScene" uid="uid://b5kt4yhfngd3u" path="res://egg.tscn" id="3_5x0u2"]
+[ext_resource type="PackedScene" uid="uid://bmsv1iip1nryx" path="res://pit.tscn" id="4_m54jc"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_nhlrp")
+Duck = ExtResource("1_iwj72")
+Egg = ExtResource("3_5x0u2")
+
+[node name="egg" parent="." instance=ExtResource("3_5x0u2")]
+position = Vector2(597, 237)
+
+[node name="pit" parent="." instance=ExtResource("4_m54jc")]
+position = Vector2(955, 506)
+
+[connection signal="hatch" from="egg" to="." method="_on_egg_hatch"]

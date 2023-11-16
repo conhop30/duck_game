@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://ho6qwoa6cc1x"]
+
+[ext_resource type="Script" path="res://duck.gd" id="1_lglbc"]
+[ext_resource type="Texture2D" uid="uid://dytrhs20elmmb" path="res://duck_animations/Sprites/Walking-Running/Walking 001.png" id="2_doj27"]
+[ext_resource type="Texture2D" uid="uid://sx0mohfnrjwx" path="res://duck_animations/Sprites/Walking-Running/Walking 002.png" id="3_6w18k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k8rtv"]
+radius = 20.0
+height = 52.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4jyft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_doj27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6w18k")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="duck" type="Area2D"]
+z_index = 1
+position = Vector2(130, 161)
+scale = Vector2(2, 2)
+script = ExtResource("1_lglbc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_k8rtv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4jyft")
+animation = &"walk"
+
+[node name="DirectionTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="EggTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="timeout" from="EggTimer" to="." method="_on_egg_timer_timeout"]
